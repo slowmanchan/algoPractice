@@ -11,6 +11,8 @@ func TestIntMinTableDriven(t *testing.T) {
 		{"test 1", []string{"flower", "flow", "flight"}, "fl"},
 		{"test 2", []string{"ab", "a"}, "a"},
 		{"test 3", []string{"reflower", "flow", "flight"}, ""},
+		{"test 4", []string{"a", "b"}, ""},
+		{"test 5", []string{"abab", "aba", ""}, ""},
 	}
 
 	for _, tt := range tests {
