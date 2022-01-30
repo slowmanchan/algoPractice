@@ -8,12 +8,12 @@ func TestValidParens(t *testing.T) {
 		x    string
 		want bool
 	}{
-		{"test 4", "(([]){})", true},
-		{"test 4", "{[]}", true},
+		{"test 9", "(}{)", false},
+		{"test 10", "}{", false},
 		{"test 10", "([}}])", false},
 		{"test 9", "(])", false},
-		{"test 9", "(}{)", false},
 		{"test 9", "[[[]", false},
+		{"test 4", "{[]}", true},
 		{"test 1", "()", true},
 		{"test 2", "()[]()", true},
 		{"test 3", "(]", false},
@@ -21,6 +21,7 @@ func TestValidParens(t *testing.T) {
 		{"test 6", "){", false},
 		{"test 7", "(){}}{", false},
 		{"test 8", ")(){}", false},
+		{"test 8", "[(){}]", true},
 	}
 
 	for _, tt := range tests {
