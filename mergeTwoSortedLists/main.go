@@ -1,9 +1,5 @@
 package main
 
-func main() {
-
-}
-
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -38,3 +34,25 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 // L1 is less or equal so move to the next L1 list (l1.next)
 // Doing this will order the recursive calls and will resolve with
 // each list being added to the next
+
+// No recursion
+func mergeTwoListsNoRecurse(l1 *ListNode, l2 *ListNode) *ListNode {
+	var dummy = new(ListNode)
+	var p = dummy
+	for l1 != nil && l2 != nil {
+		if l1.Val < l2.Val {
+			p.Next = l1
+			l1 = l1.Next
+		} else {
+			p.Next = l2
+			l2 = l2.Next
+		}
+		p = p.Next
+	}
+	if l1 != nil {
+		p.Next = l1
+	} else {
+		p.Next = l2
+	}
+	return dummy.Next
+}
