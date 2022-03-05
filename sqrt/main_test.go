@@ -8,9 +8,10 @@ func TestSqrt(t *testing.T) {
 		x    int
 		want int
 	}{
+		// {"test 1", 2, 1},
 		// {"test 1", 4, 2},
 		{"test 2", 8, 2},
-		// {"test 3", 5, 3125},
+		// {"test 3", 2147395600, 46340},
 	}
 
 	for _, tt := range tests {
