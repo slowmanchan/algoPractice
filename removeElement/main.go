@@ -1,28 +1,30 @@
 package main
 
+// two pointers again
+// we want to shift the array down everytime we
+// see and element not to be removed
 func removeElement(nums []int, val int) int {
-	result := 0
-	for j := 0; j < len(nums); j++ {
-		if nums[j] != val {
-			nums[result] = nums[j]
-			result++
+	// keep a low pointer
+	low := 0
+
+	// keep a high pointer
+	for high := 0; high < len(nums); high++ {
+		// if the high pointer doesnt equal our target
+		// we set the low pointer value to the current value
+		// and
+		// we move the low pointer up one
+		// we are basically shifting over the non target values to the
+		// front and also keeping track of how many times we did this
+		// ensures that if we get a run of the target, we can just keep moving
+		// and if we hit a non target, we've kept the location (low pointer)
+		// of the non target so we just replace the value there
+		if nums[high] != val {
+			nums[low] = nums[high]
+			low++
 		}
 	}
-	return result
+
+	// we return the low pointer (which is also counting the number of)
+	// non target values
+	return low
 }
-
-// remove val from nums
-// modify same array
-// return the length of remaining vals
-
-// EG. array = [3, 2, 2, 3] val = 3
-// run through array
-// 3 == 3 then do nothing
-// 2 != 3 then set nums[0] to 2 why?
-// we shifting the array to the left. keeping the
-// deleted items in the front of the array
-// 2 != 3 then set nums[1] to 2 why?
-// we use result as the moving window because it keeps track
-// of how many we've deleted which is also the right position the shift
-// 3 == 3 then do nothing
-// we end up with 2 deleted items

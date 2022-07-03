@@ -2,17 +2,18 @@ package main
 
 // my solutions
 func plusOne(digits []int) []int {
+	// loop thru digits in reverse order
 	for i := len(digits) - 1; i >= 0; i-- {
-		answer := digits[i] + 1
-		if answer == 10 {
+		// if theres a nine, set it to 0
+		if digits[i] == 9 {
 			digits[i] = 0
-			if i == 0 {
-				return append([]int{1}, digits...)
-			}
 		} else {
-			digits[i] = answer
+			// otherwise add one to the number
+			// and were done
+			digits[i]++
 			return digits
 		}
 	}
-	return digits
+	// if we have ALL zeroes, put one in the front
+	return append([]int{1}, digits...)
 }

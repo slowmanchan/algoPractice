@@ -36,23 +36,47 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 // each list being added to the next
 
 // No recursion
+
 func mergeTwoListsNoRecurse(l1 *ListNode, l2 *ListNode) *ListNode {
-	var dummy = new(ListNode)
-	var p = dummy
+	// setup a dummy pointer to keep track of the head
+	// if not, when you traverse, you lose track of where the front is
+	// keep track (point to) the previous node as well (just copy the dummyhead)
+	dummyHead := new(ListNode)
+	prev := dummyHead
+
+	// keep going until both lists are exhausted of nodes to check
 	for l1 != nil && l2 != nil {
+		// check the smaller value
 		if l1.Val < l2.Val {
-			p.Next = l1
+			// if its l1, set the next node to l1 (we are sorting small to high)
+			// we dont want to use dummy because thats the head we need to return
+			// thats why we have a prev node pointer so we set that
+			prev.Next = l1
+			// move the l1 node along since we've check and "used" the value
+			// if we dont move, we will keep checking the same value
 			l1 = l1.Next
 		} else {
-			p.Next = l2
+			// same as above
+			prev.Next = l2
 			l2 = l2.Next
 		}
-		p = p.Next
+		// we ALWAYS move up the prev pointer. If we dont
+		// we will be stuck AND override the nodes everytime
+		prev = prev.Next
 	}
+
+	// we might have leftover nodes. Those values might
+	// have been larger then all the other nodes so we just
+	// merge it in by checking if they are null.
+	// the list node would be null because we kept moving the pointer
 	if l1 != nil {
-		p.Next = l1
+		prev.Next = l1
 	} else {
-		p.Next = l2
+		prev.Next = l2
 	}
-	return dummy.Next
+
+	// make sure the return Next node in the dummy head
+	// because when we initialized it, it just had a dummy value (nil)
+	// we were actually just setting the next node over and over.
+	return dummyHead.Next
 }

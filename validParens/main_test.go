@@ -8,7 +8,7 @@ func TestValidParens(t *testing.T) {
 		x    string
 		want bool
 	}{
-		{"test 9", "(}{)", false},
+		{"test 1", "(}{)", false},
 		{"test 10", "}{", false},
 		{"test 10", "([}}])", false},
 		{"test 9", "(])", false},
